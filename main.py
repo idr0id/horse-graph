@@ -39,20 +39,20 @@ def adjacency(i, j: int) -> list[tuple[tuple[int, int], tuple[int, int]]]:
 
 
 if __name__ == '__main__':
-    adj = empty_table(8)
+    adjacencyGraph = empty_table(8)
 
-    for i, j in adj.nodes():
-        adj.add_edges_from(adjacency(i, j))
+    for i, j in adjacencyGraph.nodes():
+        adjacencyGraph.add_edges_from(adjacency(i, j))
 
-    result: nx.DiGraph = empty_table(8).to_directed()
+    pathGraph: nx.DiGraph = empty_table(8).to_directed()
 
     sourceSquare = square_to_tuple("B1")
     targetSquare = square_to_tuple("E3")
 
-    path = nx.shortest_path(adj, sourceSquare, targetSquare)
-    nx.add_path(result, path)
+    path = nx.shortest_path(adjacencyGraph, sourceSquare, targetSquare)
+    nx.add_path(pathGraph, path)
 
-    pos = dict((n, n) for n in result.nodes())
-    labels = dict(((i, j), tuple_to_square((i, j))) for (i, j) in result.nodes())
-    nx.draw_networkx(result, node_size=500, node_color="tab:orange", pos=pos, labels=labels)
+    pos = dict((n, n) for n in pathGraph.nodes())
+    labels = dict(((i, j), tuple_to_square((i, j))) for (i, j) in pathGraph.nodes())
+    nx.draw_networkx(pathGraph, node_size=500, node_color="tab:orange", pos=pos, labels=labels)
     plt.show()
